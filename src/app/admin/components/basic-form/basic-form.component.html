@@ -1,0 +1,172 @@
+<form [formGroup]="form" (ngSubmit)="save($event)">
+  <div formGroupName="fullName">
+    <mat-form-field appearance="fill">
+      <mat-label>Name: {{ nameField.value }}</mat-label>
+      <input matInput type="text" formControlName="name">
+      <mat-icon matSuffix *ngIf="isNameFieldValid">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isNameFieldInvalid">close</mat-icon>
+    </mat-form-field>
+    <div class="messages" [class.active]="isNameFieldInvalid">
+      <mat-error *ngIf="nameField.hasError('required')">
+        Este campo es requerido
+      </mat-error>
+      <mat-error *ngIf="nameField.hasError('maxlength')">
+        debe tener maximo 10 c
+      </mat-error>
+      <mat-error *ngIf="nameField.hasError('pattern')">
+        No debe tener carac..
+      </mat-error>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name: {{ lastField.value }} {{ lastField.valid }}</mat-label>
+      <input matInput type="text" formControlName="lastname">
+      <mat-icon matSuffix *ngIf="isLastNameFieldValid">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isLastNameFieldInvalid">close</mat-icon>
+    </mat-form-field>
+    <div class="messages" [class.active]="isLastNameFieldInvalid">
+      <mat-error *ngIf="nameField.hasError('required')">
+        Este campo es requerido
+      </mat-error>
+      <mat-error *ngIf="nameField.hasError('maxlength')">
+        debe tener maximo 10 c
+      </mat-error>
+      <mat-error *ngIf="nameField.hasError('pattern')">
+        No debe tener carac..
+      </mat-error>
+    </div>
+
+  </div>
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+    <mat-error *ngIf="emailField.hasError('email') && !emailField.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailField.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Age</mat-label>
+    <input type="number" formControlName="age" matInput>
+    <!-- <mat-icon matSuffix color="primary" *ngIf="isAgeValid()">done</mat-icon>
+    <mat-icon matSuffix color="warn" *ngIf="isAgeInvalid()">close</mat-icon> -->
+  </mat-form-field>
+  <div class="messages" [class.active]="ageField.touched && ageField.invalid">
+    <p>
+      <strong *ngIf="ageField.hasError('required')">Este campo es requerido</strong>
+    </p>
+    <p>
+      <strong *ngIf="ageField.hasError('min')">Debe ser mayor de edad</strong>
+    </p>
+    <p>
+      <strong *ngIf="ageField.hasError('max')">Debe ser menor de 100 años</strong>
+    </p>
+  </div>
+  <mat-form-field>
+    <mat-label>Phone</mat-label>
+    <span matPrefix>+1 &nbsp;</span>
+    <input type="tel" formControlName="phone" matInput placeholder="555-555-1234">
+    <mat-icon matSuffix>mode_edit</mat-icon>
+    <!-- <mat-icon matSuffix color="primary" *ngIf="isPhoneValid()">done</mat-icon>
+    <mat-icon matSuffix color="warn" *ngIf="isPhoneInvalid()">close</mat-icon> -->
+  </mat-form-field>
+  <div class="messages" [class.active]="phoneField.touched && phoneField.invalid">
+    <p>
+      <strong *ngIf="phoneField.touched && phoneField.hasError('required')">Este campo es requerido</strong>
+    </p>
+  </div>
+  <mat-form-field>
+    <mat-label>Color</mat-label>
+    <input type="color" formControlName="color" matInput>
+    <!-- <mat-icon matSuffix color="primary" *ngIf="isColorValid()">done</mat-icon>
+    <mat-icon matSuffix color="warn" *ngIf="isColorInvalid()">close</mat-icon> -->
+  </mat-form-field>
+  <!-- <div class="messages" [class.active]="isColorInvalid()">
+    <mat-error *ngIf="color().hasError('required') && color().touched">Este campo es requerido</mat-error>
+  </div> -->
+  <mat-form-field>
+    <mat-label>Date</mat-label>
+    <input matInput formControlName="date" [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <!-- <mat-icon matSuffix color="primary" *ngIf="isDateValid()">done</mat-icon>
+    <mat-icon matSuffix color="warn" *ngIf="isDateInvalid()">close</mat-icon> -->
+  </mat-form-field>
+  <!-- <div class="messages" [class.active]="isDateInvalid()">
+    <mat-error *ngIf="date().hasError('required') && date().touched">Este campo es requerido</mat-error>
+  </div> -->
+  <mat-form-field appearance="fill">
+    <mat-label>url:</mat-label>
+    <input matInput type="text" formControlName="url">
+    <!-- <mat-icon matSuffix *ngIf="isNameFieldValid">done</mat-icon>
+    <mat-icon matSuffix *ngIf="isNameFieldInvalid">close</mat-icon> -->
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category">
+      <mat-option value="category-1">Category 1</mat-option>
+      <mat-option value="category-2">Category 2</mat-option>
+      <mat-option value="category-3">Category 3</mat-option>
+      <mat-option value="category-4">Category 4</mat-option>
+    </mat-select>
+    <!-- <mat-icon matSuffix color="primary" *ngIf="isTagValid()">done</mat-icon>
+    <mat-icon matSuffix color="warn" *ngIf="isTagInvalid()">close</mat-icon> -->
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Tag</mat-label>
+    <mat-select formControlName="tag" multiple>
+      <mat-option value="tag-1">Tag 1</mat-option>
+      <mat-option value="tag-2">Tag 2</mat-option>
+      <mat-option value="tag-3">Tag 3</mat-option>
+      <mat-option value="tag-4">Tag4</mat-option>
+    </mat-select>
+    <!-- <mat-icon matSuffix color="primary" *ngIf="isTagValid()">done</mat-icon>
+    <mat-icon matSuffix color="warn" *ngIf="isTagInvalid()">close</mat-icon> -->
+  </mat-form-field>
+  <br>
+  <section class="example-section">
+    <mat-checkbox class="example-margin" formControlName="agree"> Agree: {{ agreeField.value }}</mat-checkbox>
+  </section>
+  <br>
+  <mat-radio-group formControlName="gender">
+    <mat-radio-button name="gender" value="male">Male</mat-radio-button>
+    <mat-radio-button name="gender" value="female">Female</mat-radio-button>
+    <mat-radio-button name="gender" value="other">Other</mat-radio-button>
+  </mat-radio-group>
+  <br>
+  <mat-radio-group formControlName="zone">
+    <mat-radio-button name="zone" value="zona-1">zona-1</mat-radio-button>
+    <mat-radio-button name="zone" value="zona-2">zona-2</mat-radio-button>
+    <mat-radio-button name="zone" value="zona-3">zona-3</mat-radio-button>
+    <mat-radio-button name="zone" value="zona-4">zona-4</mat-radio-button>
+  </mat-radio-group>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>categories</mat-label>
+    <mat-select [formControl]="categories" multiple>
+      <mat-select-trigger>
+        {{categories.value?.[0] || ''}}
+        <span *ngIf="(categories.value?.length || 0) > 1" class="example-additional-selection">
+          (+{{ (categories.value?.length || 0) - 1 }}
+          {{ categories.value?.length === 2 ? "other" : "others" }})
+        </span>
+      </mat-select-trigger>
+      <mat-option *ngFor="let category of categoriesList" [value]="category">{{
+        category
+        }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="(categories.value?.length || 0) > 1">
+    <h3>List from categories</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let item of categories.value">
+        <div matListItemTitle>{{ item }}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <p>
+    <button mat-raised-button color="primary" type="submit">Enviar</button>
+  </p>
+</form>

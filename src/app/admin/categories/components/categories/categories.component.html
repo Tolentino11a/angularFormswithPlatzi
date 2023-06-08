@@ -1,0 +1,29 @@
+
+<a mat-raised-button color="accent" routerLink="create">Crear categoría</a>
+<div class="categories" *ngIf="(data$ | async ) as dataArray">
+    <div *ngFor="let data of dataArray">
+        <mat-card>
+            <mat-card-header>
+              <mat-card-title>{{ data.name | uppercase }}</mat-card-title>
+            </mat-card-header>
+            <div class="crop-image">
+              <img [src]="data.image" alt="">
+            </div>
+            <mat-card-content>
+                <p>
+                    Lorem ipsum dolor sit amet, 
+                    consectetur adipiscing elit. 
+                    Nunc convallis eget ante ut imperdiet. 
+                    Nunc ipsum lorem, accumsan eu lobortis 
+                    ac, luctus at leo. Nullam tortor sapien,
+                    mollis quis suscipit nec, tincidunt sed
+                    quam.
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button [routerLink]="['edit',data.id]">Editar</button>
+                <button mat-raised-button color="warn">Eliminar</button>
+              </mat-card-actions>
+          </mat-card>
+    </div>
+</div>
